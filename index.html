@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tinh Tuoi</title>
+</head>
+<body>
+    <h1>Tinh Tuoi</h1>
+    <p>Đây là chương trình cho phép bạn nhập năm sinh và tính tuổi của bạn</p>
+    <button onclick="tinhTuoi()">Tính Tuổi</button>
+    <p id="tuoiResult"></p> 
+    <script>
+        async function tinhTuoi() {
+            const namSinh = prompt("Nhập năm sinh của bạn:");
+            if (namSinh === null) return;
+            const response = await fetch('https://helloworldsumfunction.onrender.com/tinhTuoi', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ namSinh: Number(namSinh) })
+            });
+            const data = await response.json();
+            document.getElementById('tuoiResult').innerText = "Tuổi của bạn là: " + data.tuoi;
+        }
+    </script>
+</body>
+</html>
